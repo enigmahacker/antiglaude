@@ -95,40 +95,46 @@ async def list_models(
     # List of models supported by Cloud Code and mapped in the gateway
     models = [
         ModelItem(
-            id="claude-sonnet-4-6",
-            display_name="Claude Sonnet 4.6 (Thinking)",
-            description="High-speed agentic reasoning via Antiglaude Bridge",
-            created=1738000000,
+            id="claude-sonnet-5-5",
+            display_name="Claude Sonnet 5.5",
+            description="Primary agentic reasoning engine via Antiglaude Bridge (Antigravity Pro/Ultra)",
+            created=1762041600,
         ),
         ModelItem(
-            id="claude-opus-4-6-thinking",
-            display_name="Claude Opus 4.6 (Thinking)",
-            description="Deep multi-step reasoning with extended thought chains via Antiglaude Bridge",
-            created=1738000000,
+            id="claude-opus-5-5-thinking",
+            display_name="Claude Opus 5.5 (Thinking)",
+            description="Deep multi-step reasoning with extended thought chains via Antiglaude Bridge (Antigravity Pro/Ultra)",
+            created=1762041600,
+        ),
+        ModelItem(
+            id="gemini-4-argon",
+            display_name="Gemini 4 Argon",
+            description="Newest pro-class Gemini, large-context analysis via Antiglaude Bridge",
+            created=1762041600,
+        ),
+        ModelItem(
+            id="gemini-3.8-flash",
+            display_name="Gemini 3.8 Flash",
+            description="Ultra-low latency, high throughput via Antiglaude Bridge",
+            created=1762041600,
+        ),
+        ModelItem(
+            id="gemini-3.1-pro",
+            display_name="Gemini 3.1 Pro",
+            description="Massive-context analytical model via Antiglaude Bridge",
+            created=1762041600,
         ),
         ModelItem(
             id="claude-3-7-sonnet-20250219",
             display_name="Claude 3.7 Sonnet (Alias)",
-            description="Standard Anthropic alias routed to Sonnet 4.6",
-            created=1738000000,
+            description="Standard Anthropic alias routed to Claude Sonnet 5.5",
+            created=1762041600,
         ),
         ModelItem(
             id="claude-3-5-sonnet-20241022",
             display_name="Claude 3.5 Sonnet (Alias)",
-            description="Standard Anthropic alias routed to Sonnet 4.6",
-            created=1738000000,
-        ),
-        ModelItem(
-            id="gemini-3-flash",
-            display_name="Gemini 3 Flash",
-            description="Ultra-low latency, high throughput via Antiglaude Bridge",
-            created=1738000000,
-        ),
-        ModelItem(
-            id="gemini-2.5-pro",
-            display_name="Gemini 2.5 Pro",
-            description="Large-context analytical model via Antiglaude Bridge",
-            created=1738000000,
+            description="Standard Anthropic alias routed to Claude Sonnet 5.5",
+            created=1762041600,
         ),
     ]
     return ModelsResponse(data=models[:limit], has_more=False)

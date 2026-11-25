@@ -21,7 +21,7 @@ def test_models_endpoint():
     assert "data" in data
     assert len(data["data"]) > 0
     model_ids = [m["id"] for m in data["data"]]
-    assert "claude-sonnet-4-6" in model_ids
+    assert "claude-sonnet-5-5" in model_ids
 
 
 def test_count_tokens_endpoint():

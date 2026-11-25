@@ -54,10 +54,10 @@ VIEW_DAEMON = "daemon"
 VIEW_HELP = "help"
 
 MODELS_CATALOG: List[Tuple[str, str, str, str]] = [
-    ("1", "claude-sonnet-4-6", "Claude 3.7 Sonnet (Thinking)", "Primary agentic reasoning engine for Claude Code CLI"),
-    ("2", "claude-opus-4-6-thinking", "Claude 3 Opus (Extended Thinking)", "Deep analytical & complex architectural problem solving"),
-    ("3", "gemini-3-flash", "Gemini 3 Flash", "Ultra-fast completions, syntax checks, and lightweight calls"),
-    ("4", "gemini-2.5-pro", "Gemini 2.5 Pro", "Massive context analysis and full codebase ingestion"),
+    ("1", "claude-sonnet-5-5", "Claude Sonnet 5.5", "Primary agentic reasoning engine for Claude Code CLI"),
+    ("2", "claude-opus-5-5-thinking", "Claude Opus 5.5 (Extended Thinking)", "Deep analytical & complex architectural problem solving"),
+    ("3", "gemini-3.8-flash", "Gemini 3.8 Flash", "Ultra-fast completions, syntax checks, and lightweight calls"),
+    ("4", "gemini-3.1-pro", "Gemini 3.1 Pro", "Massive context analysis and full codebase ingestion"),
 ]
 
 
@@ -149,10 +149,10 @@ def get_current_claude_model() -> str:
         if SETTINGS_FILE.exists():
             with open(SETTINGS_FILE, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                return data.get("model", "claude-sonnet-4-6")
+                return data.get("model", "claude-sonnet-5-5")
     except Exception:
         pass
-    return "claude-sonnet-4-6"
+    return "claude-sonnet-5-5"
 
 
 def set_current_claude_model(new_model: str) -> bool:
@@ -555,10 +555,10 @@ def run_control_panel():
 
                     elif current_view == VIEW_MODELS:
                         mapping = {
-                            "1": "claude-sonnet-4-6",
-                            "2": "claude-opus-4-6-thinking",
-                            "3": "gemini-3-flash",
-                            "4": "gemini-2.5-pro",
+                            "1": "claude-sonnet-5-5",
+                            "2": "claude-opus-5-5-thinking",
+                            "3": "gemini-3.8-flash",
+                            "4": "gemini-3.1-pro",
                         }
                         if key in mapping:
                             chosen = mapping[key]

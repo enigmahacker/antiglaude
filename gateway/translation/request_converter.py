@@ -21,12 +21,11 @@ ANTIGRAVITY_SYSTEM_INSTRUCTION = (
 
 
 VALID_GOOGLE_MODELS = {
-    "claude-sonnet-4-6",
-    "claude-opus-4-6-thinking",
-    "gemini-3-flash",
-    "gemini-3.5-flash-lite",
-    "gemini-2.5-pro",
-    "gemini-2.5-flash",
+    "claude-opus-5-5-thinking",
+    "claude-sonnet-5-5",
+    "gemini-4-argon",
+    "gemini-3.8-flash",
+    "gemini-3.1-pro",
 }
 
 
@@ -42,13 +41,13 @@ def map_model_name(requested_model: str, config=DEFAULT_CONFIG) -> Tuple[str, st
     else:
         lower = requested_model.lower()
         if "opus" in lower:
-            canonical = "claude-opus-4-6-thinking"
+            canonical = "claude-opus-5-5-thinking"
         elif "haiku" in lower or "flash" in lower:
-            canonical = "gemini-3-flash"
+            canonical = "gemini-3.8-flash"
         elif "gemini" in lower:
-            canonical = "gemini-2.5-pro" if "pro" in lower else "gemini-3-flash"
+            canonical = "gemini-3.1-pro" if "pro" in lower else "gemini-3.8-flash"
         elif "claude" in lower or "sonnet" in lower or "fable" in lower:
-            canonical = "claude-sonnet-4-6"
+            canonical = "claude-sonnet-5-5"
         else:
             canonical = config.default_model
 

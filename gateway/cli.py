@@ -118,26 +118,26 @@ def cmd_setup_claude(args):
         "replaceBuiltInOptions": False,
         "options": [
             {
-                "model": "claude-sonnet-4-6",
-                "label": "Claude Sonnet 4.6 (Thinking)",
+                "model": "claude-sonnet-5-5",
+                "label": "Claude Sonnet 5.5",
                 "description": "Fast agentic reasoning via Antiglaude Bridge",
                 "behavesAs": "claude-3-7-sonnet",
             },
             {
-                "model": "claude-opus-4-6-thinking",
-                "label": "Claude Opus 4.6 (Thinking)",
+                "model": "claude-opus-5-5-thinking",
+                "label": "Claude Opus 5.5 (Thinking)",
                 "description": "Deep reasoning with extended thinking via Antiglaude Bridge",
                 "behavesAs": "claude-3-opus",
             },
             {
-                "model": "gemini-3-flash",
-                "label": "Gemini 3 Flash",
+                "model": "gemini-3.8-flash",
+                "label": "Gemini 3.8 Flash",
                 "description": "High-speed completions via Antiglaude Bridge",
                 "behavesAs": "claude-3-5-haiku",
             },
             {
-                "model": "gemini-2.5-pro",
-                "label": "Gemini 2.5 Pro",
+                "model": "gemini-3.1-pro",
+                "label": "Gemini 3.1 Pro",
                 "description": "Analytical large-context model via Antiglaude Bridge",
                 "behavesAs": "claude-3-7-sonnet",
             },
@@ -197,7 +197,7 @@ def main():
     claude_p = subparsers.add_parser("claude", help="Run Claude Code through the bridge")
     claude_p.add_argument("--host", default=DEFAULT_CONFIG.host, help="Gateway host")
     claude_p.add_argument("--port", type=int, default=DEFAULT_CONFIG.port, help="Gateway port")
-    claude_p.add_argument("--model", default="claude-sonnet-4-6", help="Model to use")
+    claude_p.add_argument("--model", default="claude-sonnet-5-5", help="Model to use")
     claude_p.add_argument("--permission-mode", default="auto", help="Permission mode")
     claude_p.add_argument("prompt", nargs="*", help="Optional prompt to pass to claude -p")
 
@@ -205,7 +205,7 @@ def main():
     setup_p = subparsers.add_parser("setup-claude", help="Configure ~/.claude/settings.json with bridge defaults and /model selector")
     setup_p.add_argument("--host", default=DEFAULT_CONFIG.host, help="Gateway host")
     setup_p.add_argument("--port", type=int, default=DEFAULT_CONFIG.port, help="Gateway port")
-    setup_p.add_argument("--model", default="claude-sonnet-4-6", help="Default model")
+    setup_p.add_argument("--model", default="claude-sonnet-5-5", help="Default model")
 
     # tui / panel
     for name in ("tui", "panel"):

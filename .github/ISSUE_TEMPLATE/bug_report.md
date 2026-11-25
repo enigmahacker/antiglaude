@@ -22,7 +22,7 @@ A clear and concise description of what you expected to happen.
  - OS: [e.g. macOS 14.5, Ubuntu 22.04]
  - Python Version: [e.g. 3.11]
  - Claude Code Version: [e.g. `claude --version`]
- - Model Used: [e.g. claude-sonnet-4-6, gemini-3-flash]
+ - Model Used: [e.g. claude-sonnet-5-5, gemini-3.8-flash]
 
 **Logs / Screenshots**
 If applicable, add terminal output or logs from the bridge gateway (with any private tokens redacted).

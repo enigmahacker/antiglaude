@@ -32,30 +32,47 @@ class GatewayConfig:
     # Direct Gemini API Key (optional fallback/alternative provider)
     gemini_api_key: Optional[str] = None
 
-    # Model Mappings: Map requested Anthropic / Claude models to canonical backend models
+    # Model Mappings: Map requested Anthropic / Claude models to canonical backend models.
+    # Canonical targets track Antigravity's current lineup (Nov 2026): Claude Opus 5.5 /
+    # Sonnet 5.5 (Pro & Ultra), plus Gemini 4 Argon, Gemini 3.8 Flash and Gemini 3.1 Pro.
+    # Claude Opus/Sonnet 4.6 and GPT-OSS-120B were retired from Antigravity on 2026-11-02,
+    # so legacy aliases are rolled forward onto the current models.
     model_aliases: Dict[str, str] = field(
         default_factory=lambda: {
-            # Claude mappings
-            "claude-3-7-sonnet-20250219": "claude-sonnet-4-6",
-            "claude-3-5-sonnet-20241022": "claude-sonnet-4-6",
-            "claude-3-5-sonnet": "claude-sonnet-4-6",
-            "claude-3-opus-20240229": "claude-opus-4-6-thinking",
-            "claude-3-haiku-20240307": "gemini-3-flash",
-            "claude-sonnet-4-5": "claude-sonnet-4-6",
-            "claude-sonnet-4-5-thinking": "claude-sonnet-4-6",
-            "claude-opus-4-5-thinking": "claude-opus-4-6-thinking",
-            # Native model passthroughs
-            "claude-sonnet-4-6": "claude-sonnet-4-6",
-            "claude-opus-4-6-thinking": "claude-opus-4-6-thinking",
-            "gemini-3-flash": "gemini-3-flash",
-            "gemini-3.5-flash-lite": "gemini-3.5-flash-lite",
-            "gemini-2.5-pro": "gemini-2.5-pro",
-            "gemini-2.5-flash": "gemini-2.5-flash",
+            # Legacy Anthropic public IDs
+            "claude-3-7-sonnet-20250219": "claude-sonnet-5-5",
+            "claude-3-5-sonnet-20241022": "claude-sonnet-5-5",
+            "claude-3-5-sonnet": "claude-sonnet-5-5",
+            "claude-3-opus-20240229": "claude-opus-5-5-thinking",
+            "claude-3-haiku-20240307": "gemini-3.8-flash",
+            # Claude Code 4.x line -> current Sonnet/Opus
+            "claude-sonnet-4-5": "claude-sonnet-5-5",
+            "claude-sonnet-4-5-thinking": "claude-sonnet-5-5",
+            "claude-opus-4-5-thinking": "claude-opus-5-5-thinking",
+            "claude-opus-4-8": "claude-opus-5-5-thinking",
+            "claude-haiku-4-5": "gemini-3.8-flash",
+            # Retired Antigravity models (removed 2026-11-02) -> rolled forward
+            "claude-sonnet-4-6": "claude-sonnet-5-5",
+            "claude-opus-4-6-thinking": "claude-opus-5-5-thinking",
+            # Haiku / Fable -> fast Gemini / Sonnet
+            "claude-haiku-5-5": "gemini-3.8-flash",
+            "claude-fable-5-2": "claude-sonnet-5-5",
+            # Legacy Gemini IDs -> current Gemini lineup
+            "gemini-3-flash": "gemini-3.8-flash",
+            "gemini-3.5-flash-lite": "gemini-3.8-flash",
+            "gemini-2.5-pro": "gemini-3.1-pro",
+            "gemini-2.5-flash": "gemini-3.8-flash",
+            # Native model passthroughs (current Antigravity lineup)
+            "claude-opus-5-5-thinking": "claude-opus-5-5-thinking",
+            "claude-sonnet-5-5": "claude-sonnet-5-5",
+            "gemini-4-argon": "gemini-4-argon",
+            "gemini-3.8-flash": "gemini-3.8-flash",
+            "gemini-3.1-pro": "gemini-3.1-pro",
         }
     )
 
     # Default model if requested model is not found
-    default_model: str = "claude-sonnet-4-6"
+    default_model: str = "claude-sonnet-5-5"
 
     # Telemetry & Observer integration
     observer_port: int = 51676

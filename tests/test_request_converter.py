@@ -23,11 +23,11 @@ def test_scrub_client_identity():
 
 def test_map_model_name():
     m, f = map_model_name("claude-3-7-sonnet-20250219")
-    assert m == "claude-sonnet-4-6"
+    assert m == "claude-sonnet-5-5"
     assert f == "claude"
 
-    m2, f2 = map_model_name("gemini-3-flash")
-    assert m2 == "gemini-3-flash"
+    m2, f2 = map_model_name("gemini-3.8-flash")
+    assert m2 == "gemini-3.8-flash"
     assert f2 == "gemini"
 
 
@@ -42,7 +42,7 @@ def test_convert_anthropic_to_cloudcode_basic():
     )
     payload = convert_anthropic_to_cloudcode(req, project_id="test-proj", account_email="user@test.com")
     assert payload["project"] == "test-proj"
-    assert payload["model"] == "claude-sonnet-4-6"
+    assert payload["model"] == "claude-sonnet-5-5"
     assert "request" in payload
     contents = payload["request"]["contents"]
     assert len(contents) == 1

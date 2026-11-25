@@ -10,7 +10,7 @@
 [![OpenAI Compatible](https://img.shields.io/badge/OpenAI%20API-Compatible-111111.svg)](https://platform.openai.com)
 [![License](https://img.shields.io/badge/license-MIT-111111.svg)](https://opensource.org/licenses/MIT)
 
-A high-performance local protocol gateway and inference server. Antiglaude translates Anthropic Messages and OpenAI Chat Completions requests into Google Cloud Code and Gemini execution formats, enabling Claude Code CLI and standard AI toolchains to operate against upstream models including `claude-sonnet-4-6`, `claude-opus-4-6-thinking`, `gemini-3-flash`, and `gemini-2.5-pro`.
+A high-performance local protocol gateway and inference server. Antiglaude translates Anthropic Messages and OpenAI Chat Completions requests into Google Cloud Code and Gemini execution formats, enabling Claude Code CLI and standard AI toolchains to operate against upstream models including `claude-sonnet-5-5`, `claude-opus-5-5-thinking`, `gemini-4-argon`, `gemini-3.8-flash`, and `gemini-3.1-pro`.
 
 > [!WARNING]
 > **Use at your own risk**: Google has been actively detecting, suspending, and banning accounts using automated gateways and unofficial protocol proxies. Do not connect your primary personal or workplace Google account. Always use a dedicated burner account. You assume full responsibility for any account actions, quota limits, or service terminations.
@@ -116,7 +116,7 @@ make tui
 
 ```
 +--------------------------------------------------------------------------------------------------------+
-| ANTIGLAUDE BRIDGE  |  ONLINE (http://127.0.0.1:8080)  |  Default: claude-sonnet-4-6  |  2026-11-04   |
+| ANTIGLAUDE BRIDGE  |  ONLINE (http://127.0.0.1:8080)  |  Default: claude-sonnet-5-5  |  2026-11-25   |
 +--------------------------------------------------------------------------------------------------------+
 | Upstream Authentication                    | Rate Limits & Quota Meter                                 |
 | Account:        user@antigravity           | Daily Limit:        1,500 reqs/day                        |
@@ -127,14 +127,14 @@ make tui
 +--------------------------------------------+-----------------------------------------------------------+
 | Routing Matrix & Supported Models                                                                      |
 | Model Identifier           Target Backend                 Status      Requests  Description            |
-| > claude-sonnet-4-6        Claude 3.7 Sonnet (Thinking)   Active            12  Primary agentic engine |
-|   claude-opus-4-6-thinking Claude 3 Opus (Thinking)       Active             2  Deep reasoning & arch  |
-|   gemini-3-flash           Gemini 3 Flash                 Active             0  Low-latency throughput |
-|   gemini-2.5-pro           Gemini 2.5 Pro                 Active             0  Large context analysis |
+| > claude-sonnet-5-5        Claude Sonnet 5.5              Active            12  Primary agentic engine |
+|   claude-opus-5-5-thinking Claude Opus 5.5 (Thinking)     Active             2  Deep reasoning & arch  |
+|   gemini-3.8-flash         Gemini 3.8 Flash               Active             0  Low-latency throughput |
+|   gemini-3.1-pro           Gemini 3.1 Pro                 Active             0  Large context analysis |
 +--------------------------------------------------------------------------------------------------------+
 | Request Journal & Latency Log                                                                          |
 | Time      Client       Endpoint             Model              Tokens    Latency  Status               |
-| 02:49:09  claude-code  /v1/messages         claude-sonnet-4-6  23,609    1820 ms  200                  |
+| 02:49:09  claude-code  /v1/messages         claude-sonnet-5-5  23,609    1820 ms  200                  |
 +--------------------------------------------------------------------------------------------------------+
 | [r] Refresh   [m] Switch Model   [c] Run Claude   [s] Restart Server   [d] Daemon Manager   [q] Quit   |
 +--------------------------------------------------------------------------------------------------------+
@@ -173,31 +173,31 @@ This writes the required schema to `~/.claude/settings.json`:
     "CLAUDE_CODE_AUTO_MODE_SERVER": "0",
     "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1"
   },
-  "model": "claude-sonnet-4-6",
+  "model": "claude-sonnet-5-5",
   "modelPicker": {
     "replaceBuiltInOptions": false,
     "options": [
       {
-        "model": "claude-sonnet-4-6",
-        "label": "Claude Sonnet 4.6 (Thinking)",
+        "model": "claude-sonnet-5-5",
+        "label": "Claude Sonnet 5.5",
         "description": "Fast agentic reasoning via Antiglaude Bridge",
         "behavesAs": "claude-3-7-sonnet"
       },
       {
-        "model": "claude-opus-4-6-thinking",
-        "label": "Claude Opus 4.6 (Thinking)",
+        "model": "claude-opus-5-5-thinking",
+        "label": "Claude Opus 5.5 (Thinking)",
         "description": "Deep reasoning with extended thinking via Antiglaude Bridge",
         "behavesAs": "claude-3-opus"
       },
       {
-        "model": "gemini-3-flash",
-        "label": "Gemini 3 Flash",
+        "model": "gemini-3.8-flash",
+        "label": "Gemini 3.8 Flash",
         "description": "High-speed completions via Antiglaude Bridge",
         "behavesAs": "claude-3-5-haiku"
       },
       {
-        "model": "gemini-2.5-pro",
-        "label": "Gemini 2.5 Pro",
+        "model": "gemini-3.1-pro",
+        "label": "Gemini 3.1 Pro",
         "description": "Analytical large-context model via Antiglaude Bridge",
         "behavesAs": "claude-3-7-sonnet"
       }
@@ -266,7 +266,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="claude-sonnet-4-6",
+    model="claude-sonnet-5-5",
     messages=[
         {"role": "system", "content": "You are a systems engineer."},
         {"role": "user", "content": "Describe memory paging in one sentence."},
@@ -287,7 +287,7 @@ client = OpenAI(
 )
 
 stream = client.chat.completions.create(
-    model="claude-opus-4-6-thinking",
+    model="claude-opus-5-5-thinking",
     messages=[{"role": "user", "content": "Write a quicksort implementation in C."}],
     stream=True,
 )
@@ -305,7 +305,7 @@ curl -X POST http://127.0.0.1:8080/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer test" \
   -d '{
-    "model": "claude-sonnet-4-6",
+    "model": "claude-sonnet-5-5",
     "messages": [{"role": "user", "content": "Ping"}]
   }'
 
@@ -314,7 +314,7 @@ curl -N -X POST http://127.0.0.1:8080/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer test" \
   -d '{
-    "model": "gemini-3-flash",
+    "model": "gemini-3.8-flash",
     "messages": [{"role": "user", "content": "Count from 1 to 5"}],
     "stream": true
   }'
@@ -324,12 +324,14 @@ curl -N -X POST http://127.0.0.1:8080/v1/chat/completions \
 
 | Model Identifier | Target Backend | Optimized Workload |
 | :--- | :--- | :--- |
-| `claude-sonnet-4-6` *(default)* | Claude 3.7 Sonnet | Agentic workflows, coding, tool calling |
-| `claude-opus-4-6-thinking` | Claude 3 Opus (Thinking) | Complex reasoning, mathematical analysis, architecture |
-| `gemini-3-flash` | Gemini 3 Flash | Low-latency completions, summaries, high concurrency |
-| `gemini-2.5-pro` | Gemini 2.5 Pro | Deep analytical processing, large-context windows |
-| `claude-3-7-sonnet-latest` | `claude-sonnet-4-6` | Anthropic alias fallback |
-| `claude-3-5-haiku-latest` | `gemini-3-flash` | Lightweight Anthropic alias fallback |
+| `claude-sonnet-5-5` *(default)* | Claude Sonnet 5.5 | Agentic workflows, coding, tool calling |
+| `claude-opus-5-5-thinking` | Claude Opus 5.5 (Thinking) | Complex reasoning, mathematical analysis, architecture |
+| `gemini-4-argon` | Gemini 4 Argon | Newest pro-class Gemini, large-context analysis |
+| `gemini-3.8-flash` | Gemini 3.8 Flash | Low-latency completions, summaries, high concurrency |
+| `gemini-3.1-pro` | Gemini 3.1 Pro | Deep analytical processing, large-context windows |
+| `claude-3-7-sonnet-latest` | `claude-sonnet-5-5` | Anthropic alias fallback |
+| `claude-3-5-haiku-latest` | `gemini-3.8-flash` | Lightweight Anthropic alias fallback |
+| `claude-sonnet-4-6`, `claude-opus-4-6-thinking` | *(retired 2026-11-02)* → rolled forward to 5.5 | Legacy Antigravity aliases |
 
 *Heuristic Fallback: Any arbitrary model identifier requested by a client (such as `gpt-4o` or legacy strings) is mapped to the most capable active upstream model while returning the requested ID in the completion response.*
 
